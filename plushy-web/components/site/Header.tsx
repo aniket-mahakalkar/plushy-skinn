@@ -51,76 +51,78 @@ function Header({ logoUrl }: { logoUrl?: string | null }) {
   const closeMenu = () => setOpen(false)
 
   return (
-    <header
-      className={`sticky top-0 z-50 backdrop-blur-md transition-all duration-300 ${EASE} ${
-        scrolled ? 'bg-paper/85 shadow-[0_1px_0_rgba(19,19,16,0.06)]' : 'bg-paper/0'
-      }`}
-    >
+    <header className="sticky top-0 z-50">
       <div
-        className={`container flex items-center justify-between transition-[height] duration-300 ${EASE} ${
-          scrolled ? 'h-16' : 'h-20'
+        className={`backdrop-blur-md transition-all duration-300 ${EASE} ${
+          scrolled ? 'bg-paper/90 shadow-[0_1px_0_rgba(19,19,16,0.06)]' : 'bg-paper/70'
         }`}
       >
-        <Link
-          href="/"
-          onClick={closeMenu}
-          className="shrink-0 font-serif text-[1.3rem] tracking-[-0.01em] text-ink no-underline transition-opacity duration-200 hover:opacity-70"
+        <div
+          className={`container flex items-center justify-between transition-[height] duration-300 ${EASE} ${
+            scrolled ? 'h-16' : 'h-20'
+          }`}
         >
-          {logoUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element -- external Supabase-hosted logo, admin-controlled
-            <img src={logoUrl} alt="Plushy Skinn" className="h-8 w-auto" />
-          ) : (
-            'Plushy Skinn'
-          )}
-        </Link>
-
-        <nav className="hidden items-center gap-10 md:flex">
-          {links.map((link) => {
-            const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href)
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`relative flex flex-col items-center gap-1.5 py-1 text-[0.88rem] tracking-[0.01em] no-underline transition-colors duration-200 ${
-                  isActive ? 'text-ink' : 'text-ink-faint hover:text-ink'
-                }`}
-              >
-                {link.label}
-                <span
-                  aria-hidden="true"
-                  className={`h-1 w-1 rounded-full bg-tan-deep transition-opacity duration-200 ${
-                    isActive ? 'opacity-100' : 'opacity-0'
-                  }`}
-                />
-              </Link>
-            )
-          })}
-        </nav>
-
-        <div className="flex items-center gap-5">
           <Link
-            href="/cart"
-            aria-label={`View cart${count > 0 ? ` (${count} item${count === 1 ? '' : 's'})` : ''}`}
-            className="relative flex h-9 w-9 items-center justify-center text-ink-soft no-underline transition-colors hover:text-ink"
+            href="/"
+            onClick={closeMenu}
+            className="shrink-0 font-serif text-[1.3rem] tracking-[-0.01em] text-ink no-underline transition-opacity duration-200 hover:opacity-70"
           >
-            <ShoppingOutlined className="text-[1.15rem]" aria-hidden="true" />
-            {count > 0 && (
-              <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-ink text-[0.6rem] font-medium text-cream">
-                {count}
-              </span>
+            {logoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element -- external Supabase-hosted logo, admin-controlled
+              <img src={logoUrl} alt="Plushy Skinn" className="h-8 w-auto" />
+            ) : (
+              'Plushy Skinn'
             )}
           </Link>
 
-          <button
-            type="button"
-            aria-label="Toggle navigation"
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
-          >
-            <span className={`block h-px w-5 bg-ink transition-transform duration-200 ${open ? 'translate-y-[3px] rotate-45' : ''}`} />
-            <span className={`block h-px w-5 bg-ink transition-transform duration-200 ${open ? '-translate-y-[3px] -rotate-45' : ''}`} />
-          </button>
+          <nav className="hidden items-center gap-10 md:flex">
+            {links.map((link) => {
+              const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href)
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative flex flex-col items-center gap-1.5 py-1 text-[0.88rem] tracking-[0.01em] no-underline transition-colors duration-200 ${
+                    isActive ? 'text-ink' : 'text-ink-faint hover:text-ink'
+                  }`}
+                >
+                  {link.label}
+                  <span
+                    aria-hidden="true"
+                    className={`h-1 w-1 rounded-full bg-tan-deep transition-opacity duration-200 ${
+                      isActive ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                </Link>
+              )
+            })}
+          </nav>
+
+          <div className="flex items-center gap-5">
+            <Link
+              href="/cart"
+              aria-label={`View cart${count > 0 ? ` (${count} item${count === 1 ? '' : 's'})` : ''}`}
+              className="relative flex h-9 w-9 items-center justify-center text-ink-soft no-underline transition-colors hover:text-ink"
+            >
+              <ShoppingOutlined className="text-[1.15rem]" aria-hidden="true" />
+              {count > 0 && (
+                <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-ink text-[0.6rem] font-medium text-cream">
+                  {count}
+                </span>
+              )}
+            </Link>
+
+            <button
+              type="button"
+              aria-label="Toggle navigation"
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+              className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
+            >
+              <span className={`block h-[2px] w-5 rounded-full bg-ink transition-transform duration-200 ${open ? 'translate-y-[3px] rotate-45' : ''}`} />
+              <span className={`block h-[2px] w-5 rounded-full bg-ink transition-transform duration-200 ${open ? '-translate-y-[3px] -rotate-45' : ''}`} />
+            </button>
+          </div>
         </div>
       </div>
 
