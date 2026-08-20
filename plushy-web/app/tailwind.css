@@ -1,0 +1,33 @@
+/* Tailwind utilities only — no Preflight. Pre-declare layer order so the
+   hand-rolled CSS in globals.css (wrapped in `@layer base`) reliably LOSES to
+   any Tailwind utility class, matching normal Tailwind conventions — without
+   this, unlayered CSS always beats layered CSS regardless of specificity,
+   which silently broke color overrides like `text-cream` on a plain `h2`. */
+@layer base, theme, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/* Expose the existing design tokens (defined in globals.css) as Tailwind
+   utilities, e.g. bg-ink, text-tan-deep, border-border — one source of truth
+   for color/type instead of duplicating the palette. */
+@theme inline {
+  --color-bg: var(--cream);
+  --color-cream: var(--cream);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-tan: var(--tan);
+  --color-tan-deep: var(--tan-deep);
+  --color-tan-pale: var(--tan-pale);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-success: var(--success-text);
+  --color-danger: var(--danger-text);
+
+  --font-sans: var(--sans);
+  --font-serif: var(--serif);
+
+  --radius-DEFAULT: var(--radius);
+  --container-max: var(--container);
+}

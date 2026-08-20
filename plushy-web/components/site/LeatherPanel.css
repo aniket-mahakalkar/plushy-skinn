@@ -1,0 +1,22 @@
+.leather-panel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -12px 24px rgba(0, 0, 0, 0.18);
+}
+
+.leather-panel--stitch {
+  border: 1.5px dashed;
+  outline: 1px solid rgba(255, 255, 255, 0.25);
+  outline-offset: -14px;
+}
+
+.leather-panel__monogram {
+  font-family: var(--serif);
+  font-size: 2.1rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
